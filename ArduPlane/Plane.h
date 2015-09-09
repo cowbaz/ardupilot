@@ -512,6 +512,9 @@ private:
     // previous value of is_flying()
     bool previous_is_flying;
 
+    // time since started flying in any mode in milliseconds
+    uint32_t started_flying_ms;
+
     // Navigation control variables
     // The instantaneous desired bank angle.  Hundredths of a degree
     int32_t nav_roll_cd;
@@ -947,7 +950,7 @@ private:
     bool verify_command_callback(const AP_Mission::Mission_Command& cmd);
     void print_flight_mode(AP_HAL::BetterStream *port, uint8_t mode);
     void run_cli(AP_HAL::UARTDriver *port);
-    void restart_landing_sequence();
+    bool restart_landing_sequence();
     void log_init();
     uint32_t millis() const;
     uint32_t micros() const;

@@ -113,6 +113,8 @@ public:
     /// Return the current field as a Vector3f
     const Vector3f &get_field(uint8_t i) const { return _state[i].field; }
     const Vector3f &get_field(void) const { return get_field(get_primary()); }
+    const Vector3f get_field_milligauss(uint8_t i) const { return get_field(i) * _state[i].milligauss_ratio; }
+    const Vector3f get_field_milligauss(void) const { return get_field_milligauss(get_primary()); }
 
     // raw/unfiltered measurement interface
     uint32_t raw_meas_time_us(uint8_t i) const { return _state[i].raw_meas_time_us; }
@@ -127,7 +129,7 @@ public:
     bool has_unfiltered_field() const { return has_unfiltered_field(get_primary()); }
 
     const Vector3f &get_raw_field(uint8_t i) const { return _state[i].raw_field; }
-    const Vector3f &get_raw_field(void) const { return get_unfiltered_field(get_primary()); }
+    const Vector3f &get_raw_field(void) const { return get_raw_field(get_primary()); }
 
     const Vector3f &get_unfiltered_field(uint8_t i) const { return _state[i].unfiltered_field; }
     const Vector3f &get_unfiltered_field(void) const { return get_unfiltered_field(get_primary()); }
@@ -171,6 +173,8 @@ public:
     ///
     const Vector3f &get_offsets(uint8_t i) const { return _state[i].offset; }
     const Vector3f &get_offsets(void) const { return get_offsets(get_primary()); }
+    const Vector3f get_offsets_milligauss(uint8_t i) const { return get_offsets(i) * _state[i].milligauss_ratio; }
+    const Vector3f get_offsets_milligauss(void) const { return get_offsets_milligauss(get_primary()); }
 
     /// Sets the initial location used to get declination
     ///
@@ -380,6 +384,7 @@ private:
 
         // corrected magnetic field strength
         Vector3f    field;
+        float       milligauss_ratio;
 
         // when we last got data
         uint32_t    last_update_ms;

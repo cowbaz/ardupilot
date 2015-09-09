@@ -730,6 +730,21 @@ void DataFlash_Class::Log_Write_GPS(const AP_GPS &gps, uint8_t i, int32_t relati
         used          : (uint8_t)(gps.primary_sensor() == i)
     };
     WriteBlock(&pkt, sizeof(pkt));
+
+    /* write auxillary accuracy information as well */
+    float hacc = 0, vacc = 0, sacc = 0;
+    gps.horizontal_accuracy(i, hacc);
+    gps.vertical_accuracy(i, vacc);
+    gps.speed_accuracy(i, sacc);
+    struct log_GPA pkt2 = {
+        LOG_PACKET_HEADER_INIT((uint8_t)(LOG_GPA_MSG+i)),
+        time_us       : hal.scheduler->micros64(),
+        vdop          : gps.get_vdop(i),
+        hacc          : (uint16_t)(hacc*100),
+        vacc          : (uint16_t)(vacc*100),
+        sacc          : (uint16_t)(sacc*100)
+    };
+    WriteBlock(&pkt2, sizeof(pkt2));
 }
 
 // Write an RCIN packet
