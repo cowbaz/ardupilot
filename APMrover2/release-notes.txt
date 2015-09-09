@@ -1,3 +1,5 @@
+<<<<<<< HEAD
+<<<<<<< HEAD
 Release 2.50, 19 June 2015
 ==========================
 
@@ -67,6 +69,10 @@ The bug fixes in this release are:
 
 
 
+=======
+>>>>>>> diydrones/APMrover2-release
+=======
+>>>>>>> diydrones/APMrover2-release
 Release 2.48, February 20th 2015
 --------------------------------
 
@@ -100,7 +106,13 @@ The changes in this release are:
   - Added AK8963 MAG support (thanks Staroselskii Georgii)
   - Added support for second battery
   - Auto formatting of SDCard if it cannot be accessed on startup
+<<<<<<< HEAD
+<<<<<<< HEAD
   - A number of significant performance improvements for the PX4 platform
+=======
+>>>>>>> diydrones/APMrover2-release
+=======
+>>>>>>> diydrones/APMrover2-release
 
 The most important bug fix is the one for short term loss of RC
 control. This is a very long standing bug which didn't have a
